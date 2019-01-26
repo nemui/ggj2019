@@ -1,92 +1,198 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CombatTest : MonoBehaviour
 {
+
     public List<InputKey> inputList = new List<InputKey>();
+
+    public List<Transform> destinations = new List<Transform>();
+
+    public int moveSpeed;
+
+    public int decayValue;
+
+    private Transform target;
+    private Vector3 targetPos;
+    private Vector3 thisPos;
+    private float angle;
+    public float offset;
+
+    public bool isDocked = false;
+
+    public float fuel = 100f;
+    public float fuelps = 3f;
+
+    public Text fuelValue;
 
     void OnGUI()
     {
-        if (Input.anyKeyDown)
-        {
-
-            if (Event.current.isKey)
+      
+            if (Input.anyKeyDown)
             {
-                Event e = Event.current;
 
-                if (e.isKey)
+                if (Event.current.isKey)
                 {
-                    Debug.Log("Detected key code: " + e.keyCode);
-                    string eString = e.keyCode.ToString();
-                    if (eString != "None")
-                    {
-                        InputKey thisKey = new InputKey();
-                        thisKey.keyCode = eString;
-                      
-                        RunLoop(thisKey);
-                    }
-                }
+                    Event e = Event.current;
 
+                    if (e.isKey)
+                    {
+                        //Debug.Log("Detected key code: " + e.keyCode);
+                        string eString = e.keyCode.ToString();
+                        if (eString != "None")
+                        {
+                            InputKey thisKey = new InputKey();
+                            thisKey.keyCode = eString;
+
+                            RunLoop(thisKey);
+                        }
+                    }
+
+                }
             }
-        }
+        
+        
     }
 
     private void Start()
     {
+        decayValue = 100;
         StartCoroutine(Decay());
+        StartCoroutine(BurnFuel());
+    }
+
+    private void LateUpdate()
+    {
+        if (isDocked)
+        {
+            fuel += 10 * Time.deltaTime;
+            fuel = Mathf.Clamp(fuel, 0, 100);
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(5, 0) * 20);
+                isDocked = false;
+            }
+        }
+        else
+        {
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                isDocked = true;
+            }
+        }
+
+        Debug.Log(GetComponent<Rigidbody2D>().velocity.magnitude);
+        fuelValue.text = fuel.ToString();
+      
     }
 
     private void RunLoop(InputKey key)
     {
-       bool keyInList = false;
-
-       foreach(InputKey inputKey in inputList)
+        foreach (Transform des in destinations)
         {
-            if (inputKey.keyCode == key.keyCode)
+            if(!isDocked && fuel > 0)
             {
-                inputKey.timesPressed++;
-                Debug.Log("Iterate" + inputKey.keyCode + inputKey.timesPressed);
-                keyInList = true;
+                //Debug.Log("Iterating through Inputs");
+                if (key.keyCode == des.name)
+                {
+                    target = des;
+                    transform.LookAt(target.position);
+                    GetComponent<Rigidbody2D>().AddForce(transform.forward * moveSpeed);
+                }
             }
+
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (target != null)
+        {
+            Gizmos.DrawLine(transform.position, target.position);
         }
 
-        if (!keyInList)
-        {
-            // Add key to list.
-            Debug.Log("Not in list. Adding");
-            inputList.Add(key);
-            key.timesPressed++;
-            Debug.Log(key.keyCode + key.timesPressed);
-        }
     }
 
     private IEnumerator Decay()
     {
-        while(true)
+        while (true)
         {
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(1);
 
-            Debug.Log("Starting decay");
+            //Debug.Log("Starting decay");
             if (inputList.Count > 0)
             {
                 foreach (InputKey inputKey in inputList)
                 {
-                    inputKey.timesPressed--;
-                    Debug.Log("Decreased " + inputKey.keyCode + " to " + inputKey.timesPressed);
-                    
+                    inputKey.timesPressed = Mathf.Clamp(inputKey.timesPressed - decayValue, 0, 2000);
+
+                    //GetComponent<Rigidbody2D>().velocity = Vector2.Lerp(GetComponent<Rigidbody2D>().velocity,Vector2.zero,0.3f);
+                    //GetComponent<Rigidbody2D>().angularVelocity = Mathf.Lerp(GetComponent<Rigidbody2D>().angularVelocity,0,0.3f);
+                    //Debug.Log("Decreased " + inputKey.keyCode + " to " + inputKey.timesPressed);
+
                 }
                 foreach (InputKey key2 in inputList)
                 {
                     if (key2.timesPressed <= 0)
                     {
                         inputList.Remove(key2);
-                        Debug.Log("Removed" + key2.keyCode);
+                        //Debug.Log("Removed" + key2.keyCode);
                         break;
                     }
                 }
 
+
             }
+        }
+    }
+
+    private IEnumerator BurnFuel()
+    {
+        while(true)
+        {
+            
+             yield return new WaitForSeconds(1);
+             fuel -= fuelps;
+            
+           
+        }      
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "SlowDown")
+        {
+            //Debug.Log("Entering speed zone");
+            decayValue = 100;
+        }
+        if (collision.tag == "ShipEntrance")
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            isDocked = true;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Obstacle")
+        {
+            if(GetComponent<Rigidbody2D>().velocity.magnitude >= 2f)
+            {
+                Destroy(collision.gameObject);
+                fuel -= 5;
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.tag == "SlowDown")
+        {
+            //Debug.Log("Entering speed zone");
+            decayValue *= 100;
         }
     }
 }
@@ -97,4 +203,12 @@ public class InputKey
     public int timesPressed;
     public bool isEntered;
 }
+
+public class Destination
+{
+    public string id;
+    public Transform location;
+}
+
+
 
