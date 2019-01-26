@@ -25,7 +25,11 @@ public class nose : MonoBehaviour
         {
             if(parentRB.velocity.magnitude >= 2f)
             {
-                Destroy(collision.gameObject);
+                if(parent.GetComponent<CombatTest>().fuel > 0)
+                {
+                    Destroy(collision.gameObject);
+                }
+                
             }
 
         }

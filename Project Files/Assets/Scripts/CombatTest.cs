@@ -23,8 +23,8 @@ public class CombatTest : MonoBehaviour
     public bool isDocked = false;
 
     public float fuel = 100f;
-    public float fuelps = 3f;
-    public float fuelRestoreRate = 2f;
+    public float fuelps = 2f;
+    public float fuelRestoreRate = 5f;
 
     public Text fuelValue;
 
@@ -70,10 +70,12 @@ public class CombatTest : MonoBehaviour
         {
             fuel += fuelRestoreRate * Time.deltaTime;
             fuel = Mathf.Clamp(fuel, 0, 100);
+            fuelps = 0;
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 GetComponent<Rigidbody2D>().AddForce(new Vector2(5, 0) * 20);
                 isDocked = false;
+                fuelps = 5;
             }
         }
        
@@ -85,7 +87,7 @@ public class CombatTest : MonoBehaviour
     {
         foreach (Transform des in destinations)
         {
-            if(!isDocked && fuel > 0)
+            if(!isDocked)
             {
                 //Debug.Log("Iterating through Inputs");
                 if (key.keyCode == des.name)
@@ -145,11 +147,11 @@ public class CombatTest : MonoBehaviour
     {
         while(true)
         {
-            
+           
              yield return new WaitForSeconds(1);
              fuel -= fuelps;
             
-           
+            
         }      
         
     }
@@ -174,7 +176,10 @@ public class CombatTest : MonoBehaviour
         {
             if(GetComponent<Rigidbody2D>().velocity.magnitude >= 2f)
             {
-                Destroy(collision.gameObject);
+                if(fuel > 0)
+                {
+                    Destroy(collision.gameObject);
+                }               
             }
         }
     }
