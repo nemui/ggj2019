@@ -46,7 +46,8 @@ public class CombatTest : MonoBehaviour
                         {
                             InputKey thisKey = new InputKey();
                             thisKey.keyCode = eString;
-
+                            Debug.Log(thisKey.keyCode);
+    
                             RunLoop(thisKey);
                         }
                     }
@@ -59,6 +60,10 @@ public class CombatTest : MonoBehaviour
 
     private void Start()
     {
+        GameManager instance = GameObject.Find("GameManager").GetComponent<GameManager>();
+        moveSpeed = instance.moveSpeed;
+        fuelRestoreRate = instance.fuelRegenSpeed;
+
         decayValue = 100;
         StartCoroutine(Decay());
         StartCoroutine(BurnFuel());
@@ -122,11 +127,6 @@ public class CombatTest : MonoBehaviour
                 foreach (InputKey inputKey in inputList)
                 {
                     inputKey.timesPressed = Mathf.Clamp(inputKey.timesPressed - decayValue, 0, 2000);
-
-                    //GetComponent<Rigidbody2D>().velocity = Vector2.Lerp(GetComponent<Rigidbody2D>().velocity,Vector2.zero,0.3f);
-                    //GetComponent<Rigidbody2D>().angularVelocity = Mathf.Lerp(GetComponent<Rigidbody2D>().angularVelocity,0,0.3f);
-                    //Debug.Log("Decreased " + inputKey.keyCode + " to " + inputKey.timesPressed);
-
                 }
                 foreach (InputKey key2 in inputList)
                 {

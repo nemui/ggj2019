@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class GameManager : MonoBehaviour
 
     CombatTest combatScript;
     Mothership shipScript;
+
+    public float shipShields;
+    public float moveSpeed;
+    public float fuelRegenSpeed;
 
     public static GameManager instance = null;
 
@@ -23,6 +28,13 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(this.gameObject);
+
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        if (sceneName == "PaulScene")
+        {
+
+        }
     }
 
     // Start is called before the first frame update
@@ -55,4 +67,17 @@ public class GameManager : MonoBehaviour
         }
 
     }
+
+    private IEnumerator GameTimer()
+    {
+        int i = 0;
+        yield return new WaitForSeconds(1);
+        i++;
+        if(i >= endGameTime)
+        {
+            
+        }
+    }
+
+
 }

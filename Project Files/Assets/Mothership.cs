@@ -8,10 +8,13 @@ public class Mothership : MonoBehaviour
     public float health = 100;
     public Text shieldText;
 
+    GameManager instance;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        instance = GameObject.Find("GameManager").GetComponent<GameManager>();
+        health = instance.shipShields;
     }
 
     // Update is called once per frame

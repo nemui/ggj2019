@@ -21,10 +21,13 @@ public class ObstacleSpawner : MonoBehaviour
 
     private IEnumerator spawnObstacles()
     {
-        while(true)
+        while (true)
         {
             yield return new WaitForSeconds(Random.Range(1, 2));
             GameObject obstacle = GameObject.Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)],
+                obstacleSpawnPoints[Random.Range(0, obstacleSpawnPoints.Length)].transform.position, Quaternion.identity);
+
+            GameObject obstacle_2 = GameObject.Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)],
                 obstacleSpawnPoints[Random.Range(0, obstacleSpawnPoints.Length)].transform.position, Quaternion.identity);
         }
         
