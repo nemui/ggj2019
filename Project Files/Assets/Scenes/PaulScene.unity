@@ -1680,6 +1680,7 @@ MonoBehaviour:
   isDocked: 0
   fuel: 100
   fuelps: 3
+  fuelRestoreRate: 2
   fuelValue: {fileID: 1661879205}
 --- !u!50 &980215822
 Rigidbody2D:
@@ -2433,6 +2434,7 @@ MonoBehaviour:
   isDocked: 0
   fuel: 100
   fuelps: 3
+  fuelRestoreRate: 2
   fuelValue: {fileID: 0}
 --- !u!61 &1311102844
 BoxCollider2D:
@@ -2851,7 +2853,7 @@ GameObject:
   - component: {fileID: 1594013262}
   - component: {fileID: 1594013266}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Mothership
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

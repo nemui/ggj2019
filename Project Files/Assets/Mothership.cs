@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Mothership : MonoBehaviour
 {
-    public int health = 100;
+    public float health = 100;
 
     // Start is called before the first frame update
     void Start()
