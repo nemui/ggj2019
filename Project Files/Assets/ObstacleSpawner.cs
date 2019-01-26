@@ -23,7 +23,7 @@ public class ObstacleSpawner : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitForSeconds(Random.Range(1, 4));
+            yield return new WaitForSeconds(Random.Range(1, 2));
             GameObject obstacle = GameObject.Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)],
                 obstacleSpawnPoints[Random.Range(0, obstacleSpawnPoints.Length)].transform.position, Quaternion.identity);
         }
