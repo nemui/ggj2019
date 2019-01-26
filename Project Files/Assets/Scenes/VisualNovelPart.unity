@@ -1546,7 +1546,7 @@ MonoBehaviour:
   itemId: 92
   blockName: First Real Choice
   description: 
-  eventHandler: {fileID: 365297006}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 365297024}
   - {fileID: 365296991}
@@ -1927,20 +1927,6 @@ MonoBehaviour:
   eventHandler: {fileID: 0}
   commandList:
   - {fileID: 365297007}
---- !u!114 &365297006
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 365296951}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2f6487d21a03404cb21b245f0242e79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 365296990}
-  waitForFrames: 1
 --- !u!114 &365297007
 MonoBehaviour:
   m_ObjectHideFlags: 0
