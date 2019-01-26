@@ -1510,7 +1510,7 @@ MonoBehaviour:
   itemId: 39
   indentLevel: 0
   storyText: Sensor array indicates multiple asteroids in close proximity. Time to
-    defend the ship...
+    defend the ship.
   description: 
   character: {fileID: 0}
   portrait: {fileID: 0}
