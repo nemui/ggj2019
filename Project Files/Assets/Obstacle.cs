@@ -33,7 +33,7 @@ public class Obstacle : MonoBehaviour
     private IEnumerator RandomMovement()
     {
         target = new Vector2(Random.Range(-20,10),Random.Range(-10,0));
-        GetComponent<Rigidbody2D>().AddForce(target * 20f);
+        GetComponent<Rigidbody2D>().AddForce(target * Random.Range(10,20));
         yield return new WaitForSeconds(Random.Range(0, 3));
     }
 
