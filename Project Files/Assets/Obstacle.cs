@@ -48,19 +48,24 @@ public class Obstacle : MonoBehaviour
     
     private IEnumerator RandomMovement()
     {
-        target = new Vector3(Random.Range(-20,10),Random.Range(-10,0),0);
+        target = new Vector3(Random.Range(-10,5),Random.Range(-5,0),0);
         GetComponent<Rigidbody>().AddForce(target * Random.Range(5,8));
         yield return new WaitForSeconds(Random.Range(0, 3));
     }
 
     private IEnumerator Timer()
     {
-        int i = 0;
-        if(i >= 5)
-        {
-            Destroy(this.gameObject);
-        }
-        yield return new WaitForSeconds(1);
-        i++;
+        //while (true)
+        //{
+        //    int i = 0;
+        //    if (i >= 5)
+        //    {
+        //        Destroy(this.gameObject);
+        //    }
+        //    yield return new WaitForSeconds(1);
+        //    i++;
+        //}
+        yield return new WaitForSeconds(5);
+        Destroy(this.gameObject);
     }
 }

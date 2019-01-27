@@ -10,17 +10,30 @@ public class Mothership : MonoBehaviour
 
     GameManager instance;
 
+    public SpriteRenderer shieldVisual;
+
+    private float shieldMax = 0.0f;
+
     // Start is called before the first frame update
     void Start()
     {
         // instance = GameObject.Find("GameManager").GetComponent<GameManager>();
         // health = instance.shipShields;
+
+        shieldMax = shieldVisual.color.a;
     }
 
     // Update is called once per frame
     void Update()
     {
         shieldText.text = health.ToString();
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            health -= 10;
+
+            ChangeShieldVisual();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -29,6 +42,9 @@ public class Mothership : MonoBehaviour
         if (collision.gameObject.tag == "Obstacle")
         {
             health -= 10;
+
+            ChangeShieldVisual();
+
             if (health <= 0)
             {
                 Destroy(this.gameObject);
@@ -36,5 +52,20 @@ public class Mothership : MonoBehaviour
             Destroy(collision.gameObject);
         }
         
+    }
+
+    void ChangeShieldVisual ()
+    {
+        Color curShieldCol = shieldVisual.color;
+
+        Debug.Log("Current health is " + health + ", current alpha is " + curShieldCol.a);
+
+        curShieldCol.a = health * 0.01f;
+
+        //curShieldCol.a = Mathf.MoveTowards(curShieldCol.a, 0.0f, health * 0.001f);
+        // curShieldCol.a = Mathf.Lerp(curShieldCol.a, 0.0f, health * 0.001f);
+
+
+        shieldVisual.color = curShieldCol;
     }
 }
