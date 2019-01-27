@@ -17,8 +17,8 @@ public class Mothership : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // instance = GameObject.Find("GameManager").GetComponent<GameManager>();
-        // health = instance.shipShields;
+        instance = GameObject.Find("GameManager").GetComponent<GameManager>();
+        health = instance.shipShields;
 
         shieldMax = shieldVisual.color.a;
     }
@@ -48,6 +48,7 @@ public class Mothership : MonoBehaviour
             if (health <= 0)
             {
                 Destroy(this.gameObject);
+                instance.LoadScene("Menu");
             }
             Destroy(collision.gameObject);
         }

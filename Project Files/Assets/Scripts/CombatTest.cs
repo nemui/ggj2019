@@ -74,9 +74,9 @@ public class CombatTest : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        // instance = GameObject.Find("GameManager").GetComponent<GameManager>();
-        //moveSpeed = instance.moveSpeed;
-        //fuelRestoreRate = instance.fuelRegenSpeed;
+        instance = GameObject.Find("GameManager").GetComponent<GameManager>();
+        moveSpeed = instance.moveSpeed;
+        fuelRestoreRate = instance.fuelRegenSpeed;
 
         decayValue = 100;
         StartCoroutine(Decay());
@@ -209,8 +209,8 @@ public class CombatTest : MonoBehaviour
             {
                 if(fuel > 0)
                 {
-                    // Destroy(collision.gameObject);
-                    // instance.destroyedAsteroids++;
+                   
+                    instance.destroyedAsteroids++;
 
                     collision.gameObject.GetComponent<Obstacle>().DestroyThisObstacle();
                 }               

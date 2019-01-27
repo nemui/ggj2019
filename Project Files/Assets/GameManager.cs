@@ -154,7 +154,7 @@ public class GameManager : MonoBehaviour
                         }
                     }
 
-                    SceneManager.LoadScene("Narrative");
+                    SceneManager.LoadScene("VisualNovelPart");
                 }
                 else
                 {
@@ -167,7 +167,16 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(string newScene)
     {
-        SceneManager.LoadScene(newScene);
+        if (newScene == "Menu")
+        {
+            SceneManager.LoadScene(newScene);
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            SceneManager.LoadScene(newScene);
+        }
+        
     }
 
     private void OnApplicationQuit()
