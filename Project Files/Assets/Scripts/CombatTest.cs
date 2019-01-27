@@ -11,6 +11,8 @@ public class CombatTest : MonoBehaviour
     public List<Transform> destinations = new List<Transform>();
 
     public float moveSpeed;
+    public float const_moveSpeed;
+    public float varMoveSpeed;
 
     public int decayValue;
 
@@ -79,7 +81,7 @@ public class CombatTest : MonoBehaviour
         decayValue = 100;
         StartCoroutine(Decay());
         StartCoroutine(BurnFuel());
-
+        const_moveSpeed = moveSpeed;
         
     }
 
@@ -92,7 +94,10 @@ public class CombatTest : MonoBehaviour
             rb.MoveRotation(Quaternion.Slerp(rb.rotation, newRot, Time.deltaTime * rotSpeed));
         }
         
-
+        if(Input.GetKey(KeyCode.Space))
+        {
+            rb.velocity = rb.velocity * 0.97f;
+        }
         
         // rb.MoveRotation(Quaternion.LookRotation(heading * rotSpeed * Time.deltaTime));
         rb.MovePosition(new Vector3(rb.position.x, rb.position.y, 0));
@@ -141,8 +146,9 @@ public class CombatTest : MonoBehaviour
 
                     // transform.rotation = Quaternion.LookRotation(lookTarget);
                     // rb.MoveRotation(Quaternion.LookRotation(heading));
-                    
+                    moveSpeed = Mathf.Clamp(moveSpeed += varMoveSpeed,0,50);
                     rb.AddForce(transform.forward * moveSpeed);
+                    varMoveSpeed += 0.1f;
                 }
             }
 
@@ -164,25 +170,7 @@ public class CombatTest : MonoBehaviour
         {
             yield return new WaitForSeconds(1);
 
-            //Debug.Log("Starting decay");
-            if (inputList.Count > 0)
-            {
-                foreach (InputKey inputKey in inputList)
-                {
-                    inputKey.timesPressed = Mathf.Clamp(inputKey.timesPressed - decayValue, 0, 2000);
-                }
-                foreach (InputKey key2 in inputList)
-                {
-                    if (key2.timesPressed <= 0)
-                    {
-                        inputList.Remove(key2);
-                        //Debug.Log("Removed" + key2.keyCode);
-                        break;
-                    }
-                }
-
-
-            }
+            varMoveSpeed = Mathf.Clamp(varMoveSpeed -= 2,0,50);
         }
     }
 

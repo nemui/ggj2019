@@ -30,7 +30,7 @@ public class Obstacle : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            if (collision.gameObject.GetComponent<Rigidbody>().velocity.magnitude >= 2)
+            if (collision.gameObject.GetComponent<Rigidbody>().velocity.magnitude >= 2 || collision.gameObject.GetComponent<CombatTest>().varMoveSpeed >= 1f)
             {
                 Instantiate(explosion, transform.position, Quaternion.identity);
                 Debug.Log("Instantiated explosion?");
