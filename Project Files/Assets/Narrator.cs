@@ -25,6 +25,7 @@ public class Narrator : MonoBehaviour
             talkFlowchart.SetIntegerVariable("DroneSpeed", infoDump.droneSpeed);
             talkFlowchart.SetIntegerVariable("PhobosPower", infoDump.phobosPower);
             talkFlowchart.SetIntegerVariable("DeimosPower", infoDump.deimosPower);
+            talkFlowchart.SetIntegerVariable("FuelRegen", infoDump.fuelRegen);
 
             talkFlowchart.SetBooleanVariable("HasQInfo", infoDump.hasQInfo);
             talkFlowchart.SetBooleanVariable("HasQAdvice", infoDump.hasQAdvice);
@@ -55,6 +56,7 @@ public class Narrator : MonoBehaviour
         infoDump.droneSpeed = talkFlowchart.GetIntegerVariable("DroneSpeed");
         infoDump.phobosPower = talkFlowchart.GetIntegerVariable("PhobosPower");
         infoDump.deimosPower = talkFlowchart.GetIntegerVariable("DeimosPower");
+        infoDump.fuelRegen = talkFlowchart.GetIntegerVariable("FuelRegen");
 
         infoDump.hasQInfo = talkFlowchart.GetBooleanVariable("HasQInfo");
         infoDump.hasQAdvice = talkFlowchart.GetBooleanVariable("HasQAdvice");
@@ -63,6 +65,6 @@ public class Narrator : MonoBehaviour
         infoDump.talkedToQ = talkFlowchart.GetBooleanVariable("TalkedToQ");
         infoDump.talkedToAresa = talkFlowchart.GetBooleanVariable("TalkedToAresa");
         infoDump.talkedToPD = talkFlowchart.GetBooleanVariable("TalkedToPD");
-        SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
+        SceneManager.LoadScene("PaulScene", LoadSceneMode.Single);
     }
 }

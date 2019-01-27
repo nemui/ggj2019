@@ -15,6 +15,7 @@ public class InfoDump : ScriptableObject
     public int phobosPower;
     public int deimosPower;
     public string weaponSystemStatus;
+    public int fuelRegen;
 
     public bool hasQInfo;
     public bool hasQAdvice;

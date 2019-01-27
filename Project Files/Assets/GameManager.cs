@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     bool challenge2Won = false;
 
     public Text timerText;
+    public InfoDump infoDump;
 
     string sceneName;
 
@@ -52,15 +53,10 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += SceneLoaded;
         Debug.Log("Should have registered the event!");
+        shipShields = 50 * (infoDump.phobosPower + infoDump.deimosPower);
+        moveSpeed = infoDump.droneSpeed;
+        fuelRegenSpeed = infoDump.fuelRegen;
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-
-    }
-
     
     void SceneLoaded(Scene curScene, LoadSceneMode loadMode)
     {
@@ -154,7 +150,7 @@ public class GameManager : MonoBehaviour
                         }
                     }
 
-                    SceneManager.LoadScene("Narrative");
+                    SceneManager.LoadScene("VisualNovelPart");
                 }
                 else
                 {
@@ -167,7 +163,20 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(string newScene)
     {
-        SceneManager.LoadScene(newScene);
+        if (newScene == "Menu")
+        {
+            SceneManager.LoadScene(newScene);
+            Destroy(gameObject);
+        }
+        else
+        {
+            SceneManager.LoadScene(newScene);
+        }
+    }
+
+    public void GameOver()
+    {
+        Application.Quit();
     }
 
     private void OnApplicationQuit()

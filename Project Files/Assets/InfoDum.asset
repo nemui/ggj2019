@@ -18,9 +18,10 @@ MonoBehaviour:
   talkedToQ: 0
   talkedToAresa: 0
   talkedToPD: 0
-  droneSpeed: 50
+  droneSpeed: 43
   phobosPower: 1
   deimosPower: 1
   weaponSystemStatus: offline
+  fuelRegen: 3
   hasQInfo: 0
   hasQAdvice: 0

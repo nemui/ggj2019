@@ -9,9 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: a63e798f85b4b5445897f748519a74b3
   - enabled: 1
+    path: Assets/Scenes/VisualNovelPart.unity
+    guid: 9ede5901ecb9c4899a65557c7f1a8d32
+  - enabled: 1
     path: Assets/Scenes/PaulScene.unity
     guid: c87eed1c52eb80b44bbef230fb8bd03e
-  - enabled: 0
-    path:
-    guid: 00000000000000000000000000000000
   m_configObjects: {}
