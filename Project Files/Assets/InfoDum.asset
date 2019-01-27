@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf734497804e4453a9afbc7c1fd41fd2, type: 3}
   m_Name: InfoDum
   m_EditorClassIdentifier: 
-  firstTime: 0
+  firstTime: 1
   systemCount: 4
   wakedSystems: 0
   talkedToQ: 0
