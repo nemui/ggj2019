@@ -50,7 +50,7 @@ public class Obstacle : MonoBehaviour
     {
         target = new Vector3(Random.Range(-10,5),Random.Range(-5,0),0);
         GetComponent<Rigidbody>().AddForce(target * Random.Range(5,8));
-        yield return new WaitForSeconds(Random.Range(0, 3));
+        yield return new WaitForSeconds(Random.Range(0, 2));
     }
 
     private IEnumerator Timer()
@@ -65,7 +65,7 @@ public class Obstacle : MonoBehaviour
         //    yield return new WaitForSeconds(1);
         //    i++;
         //}
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(10);
         Destroy(this.gameObject);
     }
 }
