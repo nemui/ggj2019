@@ -13,8 +13,8 @@ public class Mothership : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        instance = GameObject.Find("GameManager").GetComponent<GameManager>();
-        health = instance.shipShields;
+        // instance = GameObject.Find("GameManager").GetComponent<GameManager>();
+        // health = instance.shipShields;
     }
 
     // Update is called once per frame
@@ -23,8 +23,9 @@ public class Mothership : MonoBehaviour
         shieldText.text = health.ToString();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Collision with mothership");
         if (collision.gameObject.tag == "Obstacle")
         {
             health -= 10;

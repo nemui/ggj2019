@@ -6,6 +6,10 @@ public class Obstacle : MonoBehaviour
 {
     Vector2 target;
 
+    public float xSpeedMin;
+    public float xSpeedMax;
+    public float ySpeedMin;
+    public float ySpeedMax;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,24 +20,24 @@ public class Obstacle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+       
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            if (collision.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude >= 2)
+            if (collision.gameObject.GetComponent<Rigidbody>().velocity.magnitude >= 2)
             {
                 Destroy(this.gameObject);
             }
         }
     }
-
+    
     private IEnumerator RandomMovement()
     {
-        target = new Vector2(Random.Range(-20,10),Random.Range(-10,0));
-        GetComponent<Rigidbody2D>().AddForce(target * Random.Range(5,12));
+        target = new Vector3(Random.Range(-20,10),Random.Range(-10,0),0);
+        GetComponent<Rigidbody>().AddForce(target * Random.Range(5,8));
         yield return new WaitForSeconds(Random.Range(0, 3));
     }
 

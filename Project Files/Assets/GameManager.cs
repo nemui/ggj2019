@@ -67,13 +67,18 @@ public class GameManager : MonoBehaviour
         sceneName = SceneManager.GetActiveScene().name;
         Debug.Log(sceneName);
 
-        combatScript = GameObject.Find("Player").GetComponent<CombatTest>();
-        shipScript = GameObject.Find("Mothership").GetComponent<Mothership>();
-        destroyedAsteroids = 0;
-        finalHealth = 100;
-        gameTimer = endGameTime;
-        timerText = GameObject.Find("Timer Text").GetComponent<Text>();
-        StartCoroutine(GameTimer());
+        if(sceneName == "PaulScene")
+        {
+            combatScript = GameObject.Find("Player").GetComponent<CombatTest>();
+            shipScript = GameObject.Find("Mothership").GetComponent<Mothership>();
+            destroyedAsteroids = 0;
+            finalHealth = 100;
+            gameTimer = endGameTime;
+            Debug.Log("timer set");
+            timerText = GameObject.Find("Timer Text").GetComponent<Text>();
+            StartCoroutine(GameTimer());
+        }
+        
     }
 
     // Update is called once per frame

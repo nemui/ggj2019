@@ -5,14 +5,14 @@ using UnityEngine;
 public class nose : MonoBehaviour
 {
     public GameObject parent;
-    public Rigidbody2D parentRB;
+    public Rigidbody parentRB;
 
     GameManager instance;
     // Start is called before the first frame update
     void Start()
     {
         parent = GameObject.Find("Player");
-        parentRB = parent.GetComponent<Rigidbody2D>();
+        parentRB = parent.GetComponent<Rigidbody>();
         instance = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
@@ -22,7 +22,7 @@ public class nose : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Obstacle")
         {

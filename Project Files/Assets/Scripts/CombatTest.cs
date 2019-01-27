@@ -30,6 +30,14 @@ public class CombatTest : MonoBehaviour
 
     GameManager instance;
 
+    public Rigidbody rb;
+
+    public Transform testSpace;
+
+    public Vector3 heading;
+
+    public float rotSpeed = 1;
+
     void OnGUI()
     {
       
@@ -62,17 +70,39 @@ public class CombatTest : MonoBehaviour
 
     private void Start()
     {
-        instance = GameObject.Find("GameManager").GetComponent<GameManager>();
-        moveSpeed = instance.moveSpeed;
-        fuelRestoreRate = instance.fuelRegenSpeed;
+        rb = GetComponent<Rigidbody>();
+
+        // instance = GameObject.Find("GameManager").GetComponent<GameManager>();
+        //moveSpeed = instance.moveSpeed;
+        //fuelRestoreRate = instance.fuelRegenSpeed;
 
         decayValue = 100;
         StartCoroutine(Decay());
         StartCoroutine(BurnFuel());
+
+        
     }
+
+    private void Update()
+    {
+        Quaternion newRot = Quaternion.LookRotation(heading);
+
+        rb.MoveRotation(Quaternion.Slerp(rb.rotation, newRot, Time.deltaTime * rotSpeed));
+        // rb.MoveRotation(Quaternion.LookRotation(heading * rotSpeed * Time.deltaTime));
+        rb.MovePosition(new Vector3(rb.position.x, rb.position.y, 0));
+    }
+
+    
 
     private void LateUpdate()
     {
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            Quaternion newRot = Quaternion.LookRotation(testSpace.position - transform.position);
+
+            rb.MoveRotation(Quaternion.Slerp(rb.rotation, newRot, Time.deltaTime * rotSpeed));
+        }
+
         if (isDocked)
         {
             fuel += fuelRestoreRate * Time.deltaTime;
@@ -80,12 +110,14 @@ public class CombatTest : MonoBehaviour
             fuelps = 0;
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                GetComponent<Rigidbody2D>().AddForce(new Vector2(5, 0) * 20);
+                GetComponent<Rigidbody>().AddForce(new Vector3(5, 0, 0) * 20);
                 isDocked = false;
                 fuelps = 5;
             }
         }
-       
+
+        
+      
         fuelValue.text = fuel.ToString();
       
     }
@@ -99,9 +131,11 @@ public class CombatTest : MonoBehaviour
                 //Debug.Log("Iterating through Inputs");
                 if (key.keyCode == des.name)
                 {
-                    target = des;
-                    transform.LookAt(target.position);
-                    GetComponent<Rigidbody2D>().AddForce(transform.forward * moveSpeed);
+                    heading = des.position - transform.position;
+                
+                    // transform.rotation = Quaternion.LookRotation(lookTarget);
+                    // rb.MoveRotation(Quaternion.LookRotation(heading));
+                    rb.AddForce(transform.forward * moveSpeed);
                 }
             }
 
@@ -151,14 +185,14 @@ public class CombatTest : MonoBehaviour
         {
            
              yield return new WaitForSeconds(1);
-             fuel -= GetComponent<Rigidbody2D>().velocity.magnitude * fuelps * Time.deltaTime;
+             fuel -= GetComponent<Rigidbody>().velocity.magnitude * fuelps * Time.deltaTime;
             
             
         }      
         
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.tag == "SlowDown")
         {
@@ -167,27 +201,27 @@ public class CombatTest : MonoBehaviour
         }
         if (collision.tag == "ShipEntrance")
         {
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            GetComponent<Rigidbody>().velocity = Vector2.zero;
             isDocked = true;
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Obstacle")
         {
-            if(GetComponent<Rigidbody2D>().velocity.magnitude >= 2f)
+            if(GetComponent<Rigidbody>().velocity.magnitude >= 2f)
             {
                 if(fuel > 0)
                 {
                     Destroy(collision.gameObject);
-                    instance.destroyedAsteroids++;
+                    // instance.destroyedAsteroids++;
                 }               
             }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D col)
+    private void OnTriggerExit(Collider col)
     {
         if (col.tag == "SlowDown")
         {
