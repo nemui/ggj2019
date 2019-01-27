@@ -13,7 +13,7 @@ public class Narrator : MonoBehaviour
     {
         introFlowchart = GameObject.Find("IntroFlowchart").GetComponent<Flowchart>();
         talkFlowchart = GameObject.Find("TalksFlowchart").GetComponent<Flowchart>();
-        //infoDump.firstTime = true;
+        infoDump.firstTime = true;
         if (infoDump.firstTime)
         {
             introFlowchart.enabled = true;
