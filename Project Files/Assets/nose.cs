@@ -6,11 +6,14 @@ public class nose : MonoBehaviour
 {
     public GameObject parent;
     public Rigidbody2D parentRB;
+
+    GameManager instance;
     // Start is called before the first frame update
     void Start()
     {
         parent = GameObject.Find("Player");
         parentRB = parent.GetComponent<Rigidbody2D>();
+        instance = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -28,6 +31,7 @@ public class nose : MonoBehaviour
                 if(parent.GetComponent<CombatTest>().fuel > 0)
                 {
                     Destroy(collision.gameObject);
+                    instance.destroyedAsteroids++;
                 }
                 
             }

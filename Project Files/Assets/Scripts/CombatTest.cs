@@ -28,6 +28,8 @@ public class CombatTest : MonoBehaviour
 
     public Text fuelValue;
 
+    GameManager instance;
+
     void OnGUI()
     {
       
@@ -60,7 +62,7 @@ public class CombatTest : MonoBehaviour
 
     private void Start()
     {
-        GameManager instance = GameObject.Find("GameManager").GetComponent<GameManager>();
+        instance = GameObject.Find("GameManager").GetComponent<GameManager>();
         moveSpeed = instance.moveSpeed;
         fuelRestoreRate = instance.fuelRegenSpeed;
 
@@ -149,7 +151,7 @@ public class CombatTest : MonoBehaviour
         {
            
              yield return new WaitForSeconds(1);
-             fuel -= fuelps;
+             fuel -= GetComponent<Rigidbody2D>().velocity.magnitude * fuelps * Time.deltaTime;
             
             
         }      
@@ -179,6 +181,7 @@ public class CombatTest : MonoBehaviour
                 if(fuel > 0)
                 {
                     Destroy(collision.gameObject);
+                    instance.destroyedAsteroids++;
                 }               
             }
         }

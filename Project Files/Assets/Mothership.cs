@@ -27,7 +27,7 @@ public class Mothership : MonoBehaviour
     {
         if (collision.gameObject.tag == "Obstacle")
         {
-            health -= 20;
+            health -= 10;
             if (health <= 0)
             {
                 Destroy(this.gameObject);
