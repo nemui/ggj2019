@@ -741,7 +741,7 @@ MonoBehaviour:
   description: 
   character: {fileID: 0}
   portrait: {fileID: 0}
-  voiceOverClip: {fileID: 0}
+  voiceOverClip: {fileID: 8300000, guid: a2a59f274ab3d443289d712480fd97ea, type: 3}
   showAlways: 1
   showCount: 1
   extendPrevious: 0
@@ -858,7 +858,7 @@ MonoBehaviour:
   description: 
   character: {fileID: 0}
   portrait: {fileID: 0}
-  voiceOverClip: {fileID: 0}
+  voiceOverClip: {fileID: 8300000, guid: 4c615417ca0db4af885c904836c0ba8a, type: 3}
   showAlways: 1
   showCount: 1
   extendPrevious: 0
@@ -887,7 +887,7 @@ MonoBehaviour:
   description: 
   character: {fileID: 0}
   portrait: {fileID: 0}
-  voiceOverClip: {fileID: 0}
+  voiceOverClip: {fileID: 8300000, guid: 5a2e96a6818a244fda9cd9c45a389e1f, type: 3}
   showAlways: 1
   showCount: 1
   extendPrevious: 0
