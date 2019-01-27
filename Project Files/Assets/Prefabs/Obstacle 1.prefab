@@ -96,6 +96,8 @@ MonoBehaviour:
   xSpeedMax: 10
   ySpeedMin: 0
   ySpeedMax: 5
+  explosion: {fileID: 6490991385507991644, guid: b8a66938809a2ba47beb954a15243c88,
+    type: 3}
 --- !u!54 &8569116393058183055
 Rigidbody:
   m_ObjectHideFlags: 0

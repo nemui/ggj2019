@@ -85,9 +85,15 @@ public class CombatTest : MonoBehaviour
 
     private void Update()
     {
-        Quaternion newRot = Quaternion.LookRotation(heading);
+        if(heading.magnitude > Mathf.Epsilon)
+        {
+            Quaternion newRot = Quaternion.LookRotation(heading);
 
-        rb.MoveRotation(Quaternion.Slerp(rb.rotation, newRot, Time.deltaTime * rotSpeed));
+            rb.MoveRotation(Quaternion.Slerp(rb.rotation, newRot, Time.deltaTime * rotSpeed));
+        }
+        
+
+        
         // rb.MoveRotation(Quaternion.LookRotation(heading * rotSpeed * Time.deltaTime));
         rb.MovePosition(new Vector3(rb.position.x, rb.position.y, 0));
     }
@@ -215,8 +221,10 @@ public class CombatTest : MonoBehaviour
             {
                 if(fuel > 0)
                 {
-                    Destroy(collision.gameObject);
+                    // Destroy(collision.gameObject);
                     // instance.destroyedAsteroids++;
+
+                    collision.gameObject.GetComponent<Obstacle>().DestroyThisObstacle();
                 }               
             }
         }

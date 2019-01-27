@@ -10,6 +10,9 @@ public class Obstacle : MonoBehaviour
     public float xSpeedMax;
     public float ySpeedMin;
     public float ySpeedMax;
+
+    public GameObject explosion;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -29,9 +32,18 @@ public class Obstacle : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<Rigidbody>().velocity.magnitude >= 2)
             {
+                Instantiate(explosion, transform.position, Quaternion.identity);
+                Debug.Log("Instantiated explosion?");
                 Destroy(this.gameObject);
             }
         }
+    }
+
+    public void DestroyThisObstacle()
+    {
+        Instantiate(explosion, transform.position, Quaternion.identity);
+        Debug.Log("Instantiated explosion?");
+        Destroy(this.gameObject);
     }
     
     private IEnumerator RandomMovement()
