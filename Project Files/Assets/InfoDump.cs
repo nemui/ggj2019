@@ -12,7 +12,10 @@ public class InfoDump : ScriptableObject
     public bool talkedToPD;
 
     public int droneSpeed;
-    public bool repurposedAres;
     public int phobosPower;
     public int deimosPower;
+    public string weaponSystemStatus;
+
+    public bool hasQInfo;
+    public bool hasQAdvice;
 }

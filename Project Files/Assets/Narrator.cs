@@ -21,6 +21,17 @@ public class Narrator : MonoBehaviour
         else
         {
             talkFlowchart.enabled = true;
+            talkFlowchart.SetIntegerVariable("DroneSpeed", infoDump.droneSpeed);
+            talkFlowchart.SetIntegerVariable("PhobosPower", infoDump.phobosPower);
+            talkFlowchart.SetIntegerVariable("DeimosPower", infoDump.deimosPower);
+
+            talkFlowchart.SetBooleanVariable("HasQInfo", infoDump.hasQInfo);
+            talkFlowchart.SetBooleanVariable("HasQAdvice", infoDump.hasQAdvice);
+            talkFlowchart.SetStringVariable("WeaponsStatus", infoDump.weaponSystemStatus);
+
+            talkFlowchart.SetBooleanVariable("TalkedToQ", infoDump.talkedToQ);
+            talkFlowchart.SetBooleanVariable("TalkedToAresa", infoDump.talkedToAresa);
+            talkFlowchart.SetBooleanVariable("TalkedToPD", infoDump.talkedToPD);
         }
     }
 
@@ -40,6 +51,17 @@ public class Narrator : MonoBehaviour
 
     public void LeaveScene()
     {
+        infoDump.droneSpeed = talkFlowchart.GetIntegerVariable("DroneSpeed");
+        infoDump.phobosPower = talkFlowchart.GetIntegerVariable("PhobosPower");
+        infoDump.deimosPower = talkFlowchart.GetIntegerVariable("DeimosPower");
+
+        infoDump.hasQInfo = talkFlowchart.GetBooleanVariable("HasQInfo");
+        infoDump.hasQAdvice = talkFlowchart.GetBooleanVariable("HasQAdvice");
+        infoDump.weaponSystemStatus = talkFlowchart.GetStringVariable("WeaponsStatus");
+
+        infoDump.talkedToQ = talkFlowchart.GetBooleanVariable("TalkedToQ");
+        infoDump.talkedToAresa = talkFlowchart.GetBooleanVariable("TalkedToAresa");
+        infoDump.talkedToPD = talkFlowchart.GetBooleanVariable("TalkedToPD");
         SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
     }
 }
