@@ -159,6 +159,10 @@ PrefabInstance:
       propertyPath: m_ReferenceResolution.y
       value: 800
       objectReference: {fileID: 0}
+    - target: {fileID: 11410276, guid: c6289d5f8fa843145a2355af9cb09719, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 410270, guid: c6289d5f8fa843145a2355af9cb09719, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -8229,7 +8233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 308
+    x: 307
     y: 264
     width: 156
     height: 40
@@ -8248,9 +8252,9 @@ MonoBehaviour:
   - {fileID: 1289681348}
   - {fileID: 1289681347}
   - {fileID: 1289681344}
-  - {fileID: 1289681343}
-  - {fileID: 1289681346}
   - {fileID: 1289681345}
+  - {fileID: 1289681346}
+  - {fileID: 1289681343}
   - {fileID: 1289681379}
   - {fileID: 1289681378}
   - {fileID: 1289681342}
@@ -8291,7 +8295,7 @@ MonoBehaviour:
   indentLevel: 0
   storyText: Same here. Let's finish this mission!
   description: 
-  character: {fileID: 362099087}
+  character: {fileID: 1778470987}
   portrait: {fileID: 0}
   voiceOverClip: {fileID: 0}
   showAlways: 1
@@ -8348,7 +8352,7 @@ MonoBehaviour:
   indentLevel: 0
   storyText: I'm going to buff up my side of the ship, okay, Holly?
   description: 
-  character: {fileID: 1778470987}
+  character: {fileID: 362099087}
   portrait: {fileID: 0}
   voiceOverClip: {fileID: 0}
   showAlways: 1
