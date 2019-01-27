@@ -25,10 +25,10 @@ public class ObstacleSpawner : MonoBehaviour
         {
             yield return new WaitForSeconds(Random.Range(2, 6));
             GameObject obstacle = GameObject.Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)],
-                obstacleSpawnPoints[Random.Range(0, obstacleSpawnPoints.Length)].transform.position, Quaternion.identity);
+                new Vector3(obstacleSpawnPoints[Random.Range(0, obstacleSpawnPoints.Length)].transform.position.x, obstacleSpawnPoints[Random.Range(0, obstacleSpawnPoints.Length)].transform.position.y,0), Quaternion.identity);
 
             GameObject obstacle_2 = GameObject.Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)],
-                obstacleSpawnPoints[Random.Range(0, obstacleSpawnPoints.Length)].transform.position, Quaternion.identity);
+                new Vector3(obstacleSpawnPoints[Random.Range(0, obstacleSpawnPoints.Length)].transform.position.x, obstacleSpawnPoints[Random.Range(0, obstacleSpawnPoints.Length)].transform.position.y, 0), Quaternion.identity);
         }
         
     }

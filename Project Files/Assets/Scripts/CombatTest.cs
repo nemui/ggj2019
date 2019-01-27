@@ -132,9 +132,10 @@ public class CombatTest : MonoBehaviour
                 if (key.keyCode == des.name)
                 {
                     heading = des.position - transform.position;
-                
+
                     // transform.rotation = Quaternion.LookRotation(lookTarget);
                     // rb.MoveRotation(Quaternion.LookRotation(heading));
+                    
                     rb.AddForce(transform.forward * moveSpeed);
                 }
             }
