@@ -25,3 +25,5 @@ MonoBehaviour:
   fuelRegen: 3
   hasQInfo: 0
   hasQAdvice: 0
+  goodEnding: 0
+  badEnding: 0

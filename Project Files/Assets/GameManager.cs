@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public float endGameTime;
     public float gameTimer;
+    public int battleCount;
 
     public CombatTest combatScript;
     public Mothership shipScript;
@@ -53,9 +54,9 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += SceneLoaded;
         Debug.Log("Should have registered the event!");
-        shipShields = 50 * (infoDump.phobosPower + infoDump.deimosPower);
-        moveSpeed = infoDump.droneSpeed;
-        fuelRegenSpeed = infoDump.fuelRegen;
+        shipShields = 50 * (infoDump.runtimePhobosPower + infoDump.runtimeDeimosPower);
+        moveSpeed = infoDump.runtimeDroneSpeed;
+        fuelRegenSpeed = infoDump.runtimeFuelRegen;
     }
     
     void SceneLoaded(Scene curScene, LoadSceneMode loadMode)
@@ -150,6 +151,12 @@ public class GameManager : MonoBehaviour
                         }
                     }
 
+                    battleCount = battleCount + 1;
+                    if (battleCount == 4)
+                    {
+                        infoDump.runtimeGoodEnding = true;
+                    }
+
                     SceneManager.LoadScene("VisualNovelPart");
                 }
                 else
@@ -174,9 +181,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SkipIntro()
+    {
+        infoDump.runtimeFirstTime = false;
+        battleCount++;
+        SceneManager.LoadScene("VisualNovelPart");
+    }
+
     public void GameOver()
     {
         Application.Quit();
+    }
+
+    public void TriggerBadEnding()
+    {
+        StartCoroutine("BadEnding");
+    }
+
+    IEnumerator BadEnding()
+    {
+        yield return new WaitForSeconds(2f);
+        infoDump.runtimeBadEnding = true;
+        SceneManager.LoadScene("VisualNovelPart");
     }
 
     private void OnApplicationQuit()
